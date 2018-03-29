@@ -1,3 +1,22 @@
+function romanize4(number){
+  for (var i = 3; i < 4; i++) {
+    var number4 = number[3]
+    if (number4 === "0"){
+      i=4;
+    } else {
+      if (number4 === "1"){
+        return "M";
+      } else if (number4 === "2"){
+        return "MM";
+      } else if (number4 === "3"){
+        return "MMM";
+      } else {
+
+      }
+    }
+  }
+}
+
 function romanize3(number){
   for (var i = 2; i < 3; i++) {
     var number3 = number[2]
@@ -21,7 +40,7 @@ function romanize3(number){
     } else if (number3 === "9"){
       return "CM";
     } else {
-
+      return;
     }
   }
 }
@@ -48,7 +67,7 @@ function romanize2(number){
     } else if (number2 === "9"){
       return "XC";
     } else {
-
+        return;
     }
   }
 }
@@ -75,42 +94,10 @@ function romanize(number){
     } else if (number === "9"){
       return "IX";
     } else {
-      return "zero doesn't exist in rome";
+      return "";
     }
   }
 }
-
-
-// function romanize2(number){
-//   for (var i = 1; i < 2; i++) {
-//     var number2 = number[1]
-//     console.log(number);
-//     if (number2 === "1"){
-//       return "X";
-//     } else if (number2 === "2"){
-//       return "XX";
-//     } else if (number2 === "3"){
-//       return "XXX";
-//     } else if (number2 === "4"){
-//       return "XL";
-//     } else if (number2 === "5"){
-//       return "L";
-//     } else if (number2 === "6"){
-//       return "LX";
-//     } else if (number2 === "7"){
-//       return "LXX";
-//     } else if (number2 === "8"){
-//       return "LXXX";
-//     } else if (number2 === "9"){
-//       return "XC";
-//     } else {
-//
-//     }
-//   }
-// }
-
-
-
 
 $(document).ready(function(){
   $("#form1").submit(function(event){
@@ -119,7 +106,22 @@ $(document).ready(function(){
     var inputSplit = input.split("");
     var reverseInput =inputSplit.reverse();
     console.log(inputSplit);
-    var output = romanize3(reverseInput) + romanize2(reverseInput) + romanize(reverseInput);
-    $(".output").append(output);
+    if (reverseInput[1] === "0" && reverseInput[2] === "0") {
+      var output = romanize4(reverseInput) + romanize(reverseInput);
+    } else if (reverseInput[2] === "0" && reverseInput[0] === "0") {
+      var output = romanize4(reverseInput) + romanize2(reverseInput);
+    } else if (reverseInput[1] === "0" && reverseInput[0] === "0") {
+      var output = romanize4(reverseInput) + romanize3(reverseInput);    
+    } else if (reverseInput[2] === "0") {
+      var output = romanize4(reverseInput) + romanize2(reverseInput) + romanize(reverseInput);
+    } else if (reverseInput[1] === "0") {
+      var output = romanize4(reverseInput) + romanize3(reverseInput) + romanize(reverseInput);
+    } else if (reverseInput[0] === "0") {
+      var output = romanize4(reverseInput) + romanize3(reverseInput) + romanize2(reverseInput);
+    } else {
+      var output = romanize4(reverseInput) + romanize3(reverseInput) + romanize2(reverseInput) + romanize(reverseInput);
+    };
+
+    $(".output").text(output);
   });
 });
