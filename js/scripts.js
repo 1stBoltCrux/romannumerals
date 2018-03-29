@@ -1,127 +1,112 @@
+var garbageArray = [];
 function romanize4(number){
   for (var i = 3; i < 4; i++) {
     var number4 = number[3]
-    if (number4 === "0"){
-      i=4;
-    } else {
-      if (number4 === "1"){
-        return "M";
+     if (number4 === "1"){
+        garbageArray.push("M");
       } else if (number4 === "2"){
-        return "MM";
+        garbageArray.push("MM");
       } else if (number4 === "3"){
-        return "MMM";
+        garbageArray.push("MMM");
       } else {
 
       }
     }
   }
-}
-
 function romanize3(number){
   for (var i = 2; i < 3; i++) {
     var number3 = number[2]
-    console.log(number);
     if (number3 === "1"){
-      return "C";
+      garbageArray.push("C");
     } else if (number3 === "2"){
-      return "CC";
+      garbageArray.push("CC");
     } else if (number3 === "3"){
-      return "CCC";
+      garbageArray.push("CCC");
     } else if (number3 === "4"){
-      return "CD";
+      garbageArray.push("CD");
     } else if (number3 === "5"){
-      return "D";
+      garbageArray.push("D");
     } else if (number3 === "6"){
-      return "DC";
+      garbageArray.push("DC");
     } else if (number3 === "7"){
-      return "DCC";
+      garbageArray.push("DCC");
     } else if (number3 === "8"){
-      return "DCCC";
+      garbageArray.push("DCCC");
     } else if (number3 === "9"){
-      return "CM";
+      garbageArray.push ("CM");
     } else {
-      return;
+
     }
   }
 }
 function romanize2(number){
   for (var i = 1; i < 2; i++) {
     var number2 = number[1]
-    console.log(number);
     if (number2 === "1"){
-      return "X";
+      garbageArray.push("X");
     } else if (number2 === "2"){
-      return "XX";
+      garbageArray.push("XX");
     } else if (number2 === "3"){
-      return "XXX";
+      garbageArray.push("XXX");
     } else if (number2 === "4"){
-      return "XL";
+      garbageArray.push("XL");
     } else if (number2 === "5"){
-      return "L";
+      garbageArray.push("L");
     } else if (number2 === "6"){
-      return "LX";
+      garbageArray.push("LX");
     } else if (number2 === "7"){
-      return "LXX";
+      garbageArray.push("LXX");
     } else if (number2 === "8"){
-      return "LXXX";
+      garbageArray.push("LXXX");
     } else if (number2 === "9"){
-      return "XC";
+      garbageArray.push("XC");
     } else {
-        return;
+
     }
   }
 }
 function romanize(number){
   for (var i = 0; i < 1; i++) {
     var number = number[0]
-    console.log(number);
     if (number === "1"){
-      return "I";
+      garbageArray.push("I");
     } else if (number === "2"){
-      return "II";
+      garbageArray.push("II");
     } else if (number === "3"){
-      return "III";
+      garbageArray.push("III");
     } else if (number === "4"){
-      return "IV";
+      garbageArray.push("IV");
     } else if (number === "5"){
-      return "V";
+      garbageArray.push("V");
     } else if (number === "6"){
-      return "VI";
+      garbageArray.push("VI");
     } else if (number === "7"){
-      return "VII";
+      garbageArray.push("VII");
     } else if (number === "8"){
-      return "VIII";
+      garbageArray.push("VIII");
     } else if (number === "9"){
-      return "IX";
+      garbageArray.push("IX");
     } else {
-      return "";
+
     }
   }
 }
-
 $(document).ready(function(){
   $("#form1").submit(function(event){
     event.preventDefault();
     var input = $("#input").val();
-    var inputSplit = input.split("");
-    var reverseInput =inputSplit.reverse();
-    console.log(inputSplit);
-    if (reverseInput[1] === "0" && reverseInput[2] === "0") {
-      var output = romanize4(reverseInput) + romanize(reverseInput);
-    } else if (reverseInput[2] === "0" && reverseInput[0] === "0") {
-      var output = romanize4(reverseInput) + romanize2(reverseInput);
-    } else if (reverseInput[1] === "0" && reverseInput[0] === "0") {
-      var output = romanize4(reverseInput) + romanize3(reverseInput);    
-    } else if (reverseInput[2] === "0") {
-      var output = romanize4(reverseInput) + romanize2(reverseInput) + romanize(reverseInput);
-    } else if (reverseInput[1] === "0") {
-      var output = romanize4(reverseInput) + romanize3(reverseInput) + romanize(reverseInput);
-    } else if (reverseInput[0] === "0") {
-      var output = romanize4(reverseInput) + romanize3(reverseInput) + romanize2(reverseInput);
+    if (input > 3999) {
+      alert("You can't do that!");
     } else {
-      var output = romanize4(reverseInput) + romanize3(reverseInput) + romanize2(reverseInput) + romanize(reverseInput);
-    };
-
-    $(".output").text(output);
+    var inputSplit = input.split("");
+    var reverseInput = inputSplit.reverse();
+     romanize4(reverseInput);
+     romanize3(reverseInput);
+     romanize2(reverseInput);
+     romanize(reverseInput);
+    var garbageString = garbageArray.join("");
+    $(".output").text(garbageString);
+     garbageArray.splice(0, 4);
+   }
   });
 });
